@@ -1,0 +1,8 @@
+{
+  "arbitrum-one": {
+    "voting_plugin": {
+      "address": "0xB4d532bd15bb85607F9464E06710E8FCd6e1e567",
+      "startBlock": 345872539
+    }
+  }
+}
