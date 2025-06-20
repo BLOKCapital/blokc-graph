@@ -1,11 +1,13 @@
 specVersion: 1.3.0
 indexerHints:
   prune: auto
+
 schema:
   file: ./schema.graphql
+
 dataSources:
   - kind: ethereum
-    name: voting_plugin
+    name: VotingPlugin
     network: arbitrum-one
     source:
       address: "0xB4d532bd15bb85607F9464E06710E8FCd6e1e567"
@@ -15,18 +17,54 @@ dataSources:
       kind: ethereum/events
       apiVersion: 0.0.9
       language: wasm/assemblyscript
+      file: ./src/voting-plugin.ts
+
       entities:
         - AdminChanged
         - BeaconUpgraded
+        - Initialized
+        - MembersAdded
+        - MembersRemoved
+        - MembershipContractAnnounced
+        - MetadataSet
+        - ProposalCreated
+        - ProposalExecuted
+        - TargetSet
         - Upgraded
+        - VoteCast
+        - VotingMinApprovalUpdated
+        - VotingSettingsUpdated
+
       abis:
         - name: voting_plugin
           file: ./abis/voting_plugin.json
+
       eventHandlers:
         - event: AdminChanged(address,address)
           handler: handleAdminChanged
         - event: BeaconUpgraded(indexed address)
           handler: handleBeaconUpgraded
+        - event: Initialized(uint8)
+          handler: handleInitialized
+        - event: MembersAdded(address[])
+          handler: handleMembersAdded
+        - event: MembersRemoved(address[])
+          handler: handleMembersRemoved
+        - event: MembershipContractAnnounced(indexed address)
+          handler: handleMembershipContractAnnounced
+        - event: MetadataSet(bytes)
+          handler: handleMetadataSet
+        - event: ProposalCreated(indexed uint256,indexed address,uint64,uint64,bytes,(address,uint256,bytes)[],uint256)
+          handler: handleProposalCreated
+        - event: ProposalExecuted(indexed uint256)
+          handler: handleProposalExecuted
+        - event: TargetSet((address,uint8))
+          handler: handleTargetSet
         - event: Upgraded(indexed address)
           handler: handleUpgraded
-      file: ./src/voting-plugin.ts
+        - event: VoteCast(indexed uint256,indexed address,uint8,uint256)
+          handler: handleVoteCast
+        - event: VotingMinApprovalUpdated(uint256)
+          handler: handleVotingMinApprovalUpdated
+        - event: VotingSettingsUpdated(uint8,uint32,uint32,uint64,uint256)
+          handler: handleVotingSettingsUpdated

@@ -1,24 +1,114 @@
+# Declare custom scalars up front
+scalar JSON
+
+## --- Event entities ---
+
 type AdminChanged @entity(immutable: true) {
-  id: Bytes!
-  previousAdmin: Bytes! # address
-  newAdmin: Bytes! # address
+  id: ID!
+  previousAdmin: Bytes!        
+  newAdmin: Bytes!             
   blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
+  timestamp: BigInt!
 }
 
 type BeaconUpgraded @entity(immutable: true) {
-  id: Bytes!
-  beacon: Bytes! # address
+  id: ID!
+  beacon: Bytes!               
   blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
+  timestamp: BigInt!
+}
+
+type Initialized @entity(immutable: true) {
+  id: ID!
+  version: Int!                
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}
+
+type MembersAdded @entity(immutable: true) {
+  id: ID!
+  members: [Bytes!]!           
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}
+
+type MembersRemoved @entity(immutable: true) {
+  id: ID!
+  members: [Bytes!]!           
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}
+
+type MembershipContractAnnounced @entity(immutable: true) {
+  id: ID!
+  definingContract: Bytes!     
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}
+
+type MetadataSet @entity(immutable: true) {
+  id: ID!
+  metadata: Bytes!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}
+
+type ProposalCreated @entity(immutable: true) {
+  id: ID!
+  creator: Bytes!              
+  startDate: BigInt!           
+  endDate: BigInt!             
+  metadata: Bytes!
+  actions: Bytes!              # raw ABI-encoded tuple[]              
+  allowFailureMap: BigInt!     
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}
+
+type ProposalExecuted @entity(immutable: true) {
+  id: ID!                      
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}
+
+type TargetSet @entity(immutable: true) {
+  id: ID!
+  newTargetConfig: Bytes!      # raw ABI-encoded tuple       
+  blockNumber: BigInt!
+  timestamp: BigInt!
 }
 
 type Upgraded @entity(immutable: true) {
-  id: Bytes!
-  implementation: Bytes! # address
+  id: ID!
+  implementation: Bytes!       
   blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
+  timestamp: BigInt!
+}
+
+type VoteCast @entity(immutable: true) {
+  id: ID!                      
+  proposalId: BigInt!          
+  voter: Bytes!                
+  voteOption: Int!             
+  votingPower: BigInt!         
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}
+
+type VotingMinApprovalUpdated @entity(immutable: true) {
+  id: ID!
+  minApprovals: BigInt!        
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}
+
+type VotingSettingsUpdated @entity(immutable: true) {
+  id: ID!
+  votingMode: Int!             
+  supportThreshold: Int!       
+  minParticipation: Int!       
+  minDuration: BigInt!         
+  minProposerVotingPower: BigInt!
+  blockNumber: BigInt!
+  timestamp: BigInt!
 }
