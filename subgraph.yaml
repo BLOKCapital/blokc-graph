@@ -10,7 +10,7 @@ dataSources:
     name: VotingPlugin
     network: arbitrum-one
     source:
-      address: "0xB4d532bd15bb85607F9464E06710E8FCd6e1e567"
+      address: "0xbe40B1D2f9f64163Ab6F0030819E89d07045d3D1"
       abi: voting_plugin
       startBlock: 345872539
     mapping:
