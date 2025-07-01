@@ -4,7 +4,7 @@ import {
   AdminChanged,
   BeaconUpgraded,
   Upgraded
-} from "../generated/voting_plugin/voting_plugin"
+} from "../generated/VotingPlugin/voting_plugin"
 
 export function createAdminChangedEvent(
   previousAdmin: Address,
